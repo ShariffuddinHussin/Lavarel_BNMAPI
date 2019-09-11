@@ -1,9 +1,11 @@
 <?php
 	namespace App\Http\Controllers;
+	
+	use Illuminate\Http\Request;
 	use App\Product;
-	use App\Http\Requests as HttpRequest;
+	use App\Http\Requests as Requests;
 	use GuzzleHttp\Client;
-	use GuzzleHttp\Message\Request;
+	
 	use GuzzleHttp\Message\Response;
 	
 	class checkCompany extends Controller{
@@ -50,15 +52,8 @@
     public function check(){
         $client = new Client();
         $response = $client->get('https://api.bnm.gov.my/public/consumer-alert/{str}');
-		dd($response);
-		$response_data = $res->getBody()->getContents;
-		//return the api value to variable
-		return [
-			'name'=> $this->name,
-			'registration_number'=> $this->reg_num,
-			'added_date'=> $this->d,
-			'website'=> $this->web,
-		];
+		$body = $response->getBody()->getContents();
+    	return $body;
     }
 	
 	//func for testing 
