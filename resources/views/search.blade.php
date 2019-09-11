@@ -1,8 +1,11 @@
+
 @extends('main')
+
 @section('content')
+
 <body>
 	<div class="container">
-		<form action="/search" method="POST" role="search">
+		<form action="/check" method="POST">
 			<div class="input-group">
 				<input type="text" class="form-control" name="name"
 					placeholder="Search users"> <span class="input-group-btn">
@@ -10,12 +13,11 @@
 						Search
 					</button>
 				</span>
-			</div>
+				</div>
 		</form>
 	</div>
 	
-
-		<div class ="container">
+	<div class ="container">
 		<table>
 		<tr>
 			<th>Company Name</th>
@@ -25,12 +27,12 @@
 		</tr>
 		
 		<tr>
-			<td>{{ $name }}</td>
-			<td>{{ $reg_num }} </td>
-			<td>{{ $date}}</td>
-			<td>{{ $web }}</td>
+		<td>{{ name }}</td>
+		<td>{{ reg_num }} </td>
+		<td>{{ d }}</td>
+		<td>{{ web }}</td>
 		</tr>
 			</table>
-		</div>
+	</div>
 </body>
 @endsection

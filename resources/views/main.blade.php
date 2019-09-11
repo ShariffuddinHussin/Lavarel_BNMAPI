@@ -19,6 +19,9 @@
 		}
 	</style>
 </head>
+
 	@yield('content')
+	
 	@yield('show')
+	
 </html>
