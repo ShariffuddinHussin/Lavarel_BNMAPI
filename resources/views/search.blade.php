@@ -1,14 +1,17 @@
-
 @extends('main')
 
 @section('content')
 
 <body>
+
 	<div class="container">
+
 		<form action="/check" method="POST">
+      @csrf
+
 			<div class="input-group">
 				<input type="text" class="form-control" name="name"
-					placeholder="Search users"> <span class="input-group-btn">
+					placeholder="Search Company"> <span class="input-group-btn">
 					<button type="submit" class="btn btn-secondary">
 						Search
 					</button>
@@ -16,23 +19,39 @@
 				</div>
 		</form>
 	</div>
-	
+
+
+
 	<div class ="container">
 		<table>
 		<tr>
+
 			<th>Company Name</th>
 			<th>Registration Number</th>
 			<th>Added Date</th>
 			<th>Websites</th>
+
 		</tr>
-		
+    @if(isset($response))
+    @foreach($response->data as $row)
 		<tr>
-		<td>{{ name }}</td>
-		<td>{{ reg_num }} </td>
-		<td>{{ d }}</td>
-		<td>{{ web }}</td>
+
+  		<td>{{ $row->name }}</td>
+  		<td>{{ $row->regisration_number ?: '-' }} </td>
+  		<td>{{ $row->added_date }}</td>
+  		<td>
+          @foreach($row->websites  as $website)
+        {{$website }}<br>
+        @endforeach
+    </td>
+
 		</tr>
+    @endforeach
+    @endif
 			</table>
+
 	</div>
+
 </body>
+
 @endsection
