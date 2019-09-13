@@ -2,12 +2,12 @@
 
 	namespace App\Http\Controllers;
 
-	use Illuminate\Http\Request;
-	use Illuminate\Support\Facades\Cache;
-	use App\Product;
-	use App\Http\Requests as Requests;
-	use GuzzleHttp\Client;
-	use GuzzleHttp\Message\Response;
+		use Illuminate\Http\Request;
+		use Illuminate\Support\Facades\Cache;
+		use App\Product;
+		use App\Http\Requests as Requests;
+		use GuzzleHttp\Client;
+		use GuzzleHttp\Message\Response;
 
 	class CheckCompany extends Controller {
 
@@ -58,10 +58,14 @@
 		}
 
 		public function check (Request $request) {
+			$obj = $this;
+			$name = $request -> input ('name');
 
-			$response = Cache::remember('response', 10, function () {
-    return $this -> httpGet ('https://api.bnm.gov.my/public/consumer-alert/' . $request -> input ('name'));
-	});
+			//caching...
+
+			$response = Cache::remember ('consumer-alert-' . $name , 5 , function() use ($obj, $name) {
+							return $obj -> httpGet ('https://api.bnm.gov.my/public/consumer-alert/' . $name);
+			});
 			//dd ($response);
 			return view ('search' , compact ('response'));
 			}
